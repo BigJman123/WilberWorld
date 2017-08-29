@@ -2,7 +2,7 @@
 <html lang="en"> 
 <head> 
 	<meta charset="UTF-8" />
-	<title>Future</title>
+	<title>Race to Wilber World</title>
     <script src="//cdn.jsdelivr.net/phaser/2.6.2/phaser.min.js"></script>
     <style type="text/css">
         body {
@@ -17,6 +17,10 @@
 let game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
 
 let tileSprite;
+let cherryred;
+let cars;
+
+let speed = 5;
 
 function preload() {
     game.load.image('cherryred', 'assets/cherryred.png', 149, 300);
@@ -28,13 +32,50 @@ function create() {
     
     highway = game.add.tileSprite(0, 0, 840, 650, 'highway', 0);
     
-    let car = game.add.sprite(442, 400, 'cherryred', 0).scale.setTo(.6, .6);
+    cherryred = game.add.sprite(442, 225, 'cherryred', 0);
+    cherryred.anchor.setTo(0.5, 0.5);
+    cherryred.scale.setTo(.6, .6);
     
+    //  enables input on car
+    cherryred.inputEnabled = true;
+
+    //  allows dragging with the mouse
+    cherryred.input.enableDrag(true);
     
+    cars = game.add.group();
+    cars.enableBody = true;
+    
+    upKey = game.input.keyboard.addKey(Phaser.Keyboard.UP);
+    downKey = game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
+    leftKey = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
+    rightKey = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
 }
 
 function update() {
+    
     highway.tilePosition.y += 10;
+    
+    if (upKey.isDown)
+    {
+        cherryred.y -= speed;
+    }
+    else if (downKey.isDown)
+    {
+        cherryred.y += speed;
+    }
+
+    if (leftKey.isDown)
+    {
+        cherryred.x -= speed;
+        cherryred.angle = -10;
+    }
+    else if (rightKey.isDown)
+    {
+        cherryred.x += speed;
+        cherryred.angle = +10;
+    }else {
+        cherryred.rotation = 0;
+    }
 }
 
 </script>
