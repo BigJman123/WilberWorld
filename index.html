@@ -32,15 +32,9 @@ function create() {
     
     highway = game.add.tileSprite(0, 0, 840, 650, 'highway', 0);
     
-    cherryred = game.add.sprite(442, 225, 'cherryred', 0);
+    cherryred = game.add.sprite(487, 350, 'cherryred', 0);
     cherryred.anchor.setTo(0.5, 0.5);
     cherryred.scale.setTo(.6, .6);
-    
-    //  enables input on car
-    cherryred.inputEnabled = true;
-
-    //  allows dragging with the mouse
-    cherryred.input.enableDrag(true);
     
     cars = game.add.group();
     cars.enableBody = true;
