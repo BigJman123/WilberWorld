@@ -14,31 +14,55 @@
 
 <script type="text/javascript">
 
-let game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+let game = new Phaser.Game(840, 650, Phaser.AUTO, '', { preload: preload, create: create, update: update });
 
 let tileSprite;
 let cherryred;
 let cars;
+
+let wallLeft;
+let wallRight;
 
 let speed = 5;
 
 function preload() {
     game.load.image('cherryred', 'assets/cherryred.png', 149, 300);
     game.load.image('highway', 'assets/road.png', 840, 650);
+    game.load.image('wall', 'assets/wall.png', 300, 650);
 }
 
 function create() {
     game.physics.startSystem(Phaser.Physics.ARCADE);
     
+    // adds background to game as a tileSprite
     highway = game.add.tileSprite(0, 0, 840, 650, 'highway', 0);
     
-    cherryred = game.add.sprite(487, 350, 'cherryred', 0);
+    // adds player car to the game
+    cherryred = game.add.sprite(487, 450, 'cherryred');
     cherryred.anchor.setTo(0.5, 0.5);
     cherryred.scale.setTo(.6, .6);
     
-    cars = game.add.group();
-    cars.enableBody = true;
+    // enables physics on player
+    game.physics.arcade.enable(cherryred);
+    cherryred.body.collideWorldBounds = true;
+
+    bounds = game.add.group();
+    bounds.enableBody = true;
     
+    wallLeft = bounds.create(-100, 0, 'wall');
+    wallLeft.body.immovable = true;
+    
+    // wallRight = bounds(0, 0, 'wall');
+    // wallRight.body.immovable = true;
+    // wallRight.body.allowGravity = false;
+
+
+    // cars group that contains all enemy cars
+    // cars = game.add.group();
+    // cars.enableBody = true;
+    
+    
+    // makes arrow keys avaliable
     upKey = game.input.keyboard.addKey(Phaser.Keyboard.UP);
     downKey = game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
     leftKey = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
@@ -47,8 +71,18 @@ function create() {
 
 function update() {
     
+    var wallCollideLeft = game.physics.arcade.collide(cherryred, wallLeft);
+    // var wallCollideRight = game.physics.arcade.collide(cherryred, wallRight);
+    
+    if (wallCollideLeft) {
+        console.log('Collide!');
+    }
+    
+    // this is what makes the background scroll
     highway.tilePosition.y += 10;
     
+    
+    // these are the arrow controls that move the player character
     if (upKey.isDown)
     {
         cherryred.y -= speed;
