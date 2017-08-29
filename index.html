@@ -16,16 +16,25 @@
 
 let game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
 
-function preload() {
+let tileSprite;
 
+function preload() {
+    game.load.image('cherryred', 'assets/cherryred.png', 149, 300);
+    game.load.image('highway', 'assets/road.png', 840, 650);
 }
 
 function create() {
-
+    game.physics.startSystem(Phaser.Physics.ARCADE);
+    
+    highway = game.add.tileSprite(0, 0, 840, 650, 'highway', 0);
+    
+    let car = game.add.sprite(442, 400, 'cherryred', 0).scale.setTo(.6, .6);
+    
+    
 }
 
 function update() {
-
+    highway.tilePosition.y += 10;
 }
 
 </script>
