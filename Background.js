@@ -1,11 +1,11 @@
-function backgroundAssets () {
+function backgroundAssets() {
     
     game.load.image('highway', 'assets/road.png', 840, 650);
     game.load.image('wall', 'assets/wall.png', 300, 650);
     
 }
 
-function backgroundCreate () {
+function backgroundCreate() {
     
     // adds background to game as a tileSprite
     highway = game.add.tileSprite(0, 0, 840, 650, 'highway', 0);
@@ -21,7 +21,7 @@ function backgroundCreate () {
     
 }
 
-function backgroundUpdate () {
+function backgroundUpdate() {
     
     // this is what makes the background scroll
     highway.tilePosition.y += 10;

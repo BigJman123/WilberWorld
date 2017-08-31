@@ -5,6 +5,7 @@
 	<title>Race to Wilber World</title>
     <script src="//cdn.jsdelivr.net/phaser/2.6.2/phaser.min.js"></script>
     <script type="text/javascript" src="Player.js"></script>
+    <script type="text/javascript" src="Enemy.js"></script>
     <script type="text/javascript" src="Background.js"></script>
     <style type="text/css">
         body {
@@ -30,6 +31,7 @@ let speed = 5;
 function preload() {
     
     playerAssets();
+    enemyAssets();
     backgroundAssets();
     
 }
@@ -42,6 +44,8 @@ function create() {
     backgroundCreate();
     
     playerCreate();
+    
+    enemyCreate();
     
     // makes arrow keys avaliable
     speed = game.input.keyboard.addKey(Phaser.Keyboard.UP);
@@ -59,6 +63,8 @@ function update() {
     backgroundUpdate();
     
     playerUpdate();
+    
+    enemyUpdate();
 }
 
 </script>

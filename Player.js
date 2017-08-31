@@ -1,10 +1,10 @@
-function playerAssets () {
+function playerAssets() {
     
     game.load.image('cherryred', 'assets/cherryred.png', 149, 300);
     
 }
 
-function playerCreate () {
+function playerCreate() {
     
     // adds player car to the game
     cherryred = game.add.sprite(487, 450, 'cherryred');
@@ -17,7 +17,7 @@ function playerCreate () {
     
 }
 
-function playerUpdate () {
+function playerUpdate() {
     
     cherryred.body.velocity.x = 0;
     cherryred.body.velocity.y = 0;
