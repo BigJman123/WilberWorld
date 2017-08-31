@@ -32,10 +32,20 @@ function preload() {
 }
 
 function create() {
+    
     game.physics.startSystem(Phaser.Physics.ARCADE);
     
     // adds background to game as a tileSprite
     highway = game.add.tileSprite(0, 0, 840, 650, 'highway', 0);
+
+    bounds = game.add.group();
+    bounds.enableBody = true;
+    
+    wallLeft = bounds.create(-160, 0, 'wall');
+    wallLeft.body.immovable = true;
+    
+    wallRight = bounds.create(705, 0, 'wall');
+    wallRight.body.immovable = true;
     
     // adds player car to the game
     cherryred = game.add.sprite(487, 450, 'cherryred');
@@ -46,16 +56,6 @@ function create() {
     game.physics.arcade.enable(cherryred);
     cherryred.body.collideWorldBounds = true;
 
-    bounds = game.add.group();
-    bounds.enableBody = true;
-    
-    wallLeft = bounds.create(-100, 0, 'wall');
-    wallLeft.body.immovable = true;
-    
-    // wallRight = bounds(0, 0, 'wall');
-    // wallRight.body.immovable = true;
-    // wallRight.body.allowGravity = false;
-
 
     // cars group that contains all enemy cars
     // cars = game.add.group();
@@ -63,45 +63,44 @@ function create() {
     
     
     // makes arrow keys avaliable
-    upKey = game.input.keyboard.addKey(Phaser.Keyboard.UP);
-    downKey = game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
-    leftKey = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
-    rightKey = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
+    speed = game.input.keyboard.addKey(Phaser.Keyboard.UP);
+    brake = game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
+    right = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
+    left = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
 }
 
 function update() {
     
     var wallCollideLeft = game.physics.arcade.collide(cherryred, wallLeft);
-    // var wallCollideRight = game.physics.arcade.collide(cherryred, wallRight);
+    var wallCollideRight = game.physics.arcade.collide(cherryred, wallRight);
     
-    if (wallCollideLeft) {
+    if (wallCollideLeft||wallCollideRight) {
         console.log('Collide!');
     }
     
     // this is what makes the background scroll
     highway.tilePosition.y += 10;
     
+    cherryred.body.velocity.x = 0;
+    cherryred.body.velocity.y = 0;
     
     // these are the arrow controls that move the player character
-    if (upKey.isDown)
-    {
-        cherryred.y -= speed;
+    if (speed.isDown) {
+        cherryred.body.velocity.y -= 350;
     }
-    else if (downKey.isDown)
-    {
-        cherryred.y += speed;
+    else if (brake.isDown) {
+        cherryred.body.velocity.y += 350;
     }
 
-    if (leftKey.isDown)
-    {
-        cherryred.x -= speed;
+    if (left.isDown) {
+        cherryred.body.velocity.x -= 400;
         cherryred.angle = -10;
     }
-    else if (rightKey.isDown)
-    {
-        cherryred.x += speed;
+    else if (right.isDown) {
+        cherryred.body.velocity.x += 400;
         cherryred.angle = +10;
-    }else {
+    }
+    else {
         cherryred.rotation = 0;
     }
 }
