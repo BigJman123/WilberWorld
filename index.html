@@ -4,6 +4,8 @@
 	<meta charset="UTF-8" />
 	<title>Race to Wilber World</title>
     <script src="//cdn.jsdelivr.net/phaser/2.6.2/phaser.min.js"></script>
+    <script type="text/javascript" src="Player.js"></script>
+    <script type="text/javascript" src="Background.js"></script>
     <style type="text/css">
         body {
             margin: 0;
@@ -26,41 +28,20 @@ let wallRight;
 let speed = 5;
 
 function preload() {
-    game.load.image('cherryred', 'assets/cherryred.png', 149, 300);
-    game.load.image('highway', 'assets/road.png', 840, 650);
-    game.load.image('wall', 'assets/wall.png', 300, 650);
+    
+    playerAssets();
+    backgroundAssets();
+    
 }
 
 function create() {
     
+    // starts physics
     game.physics.startSystem(Phaser.Physics.ARCADE);
     
-    // adds background to game as a tileSprite
-    highway = game.add.tileSprite(0, 0, 840, 650, 'highway', 0);
-
-    bounds = game.add.group();
-    bounds.enableBody = true;
+    backgroundCreate();
     
-    wallLeft = bounds.create(-160, 0, 'wall');
-    wallLeft.body.immovable = true;
-    
-    wallRight = bounds.create(705, 0, 'wall');
-    wallRight.body.immovable = true;
-    
-    // adds player car to the game
-    cherryred = game.add.sprite(487, 450, 'cherryred');
-    cherryred.anchor.setTo(0.5, 0.5);
-    cherryred.scale.setTo(.6, .6);
-    
-    // enables physics on player
-    game.physics.arcade.enable(cherryred);
-    cherryred.body.collideWorldBounds = true;
-
-
-    // cars group that contains all enemy cars
-    // cars = game.add.group();
-    // cars.enableBody = true;
-    
+    playerCreate();
     
     // makes arrow keys avaliable
     speed = game.input.keyboard.addKey(Phaser.Keyboard.UP);
@@ -71,38 +52,13 @@ function create() {
 
 function update() {
     
+    // collision between the car and the right/left walls
     var wallCollideLeft = game.physics.arcade.collide(cherryred, wallLeft);
     var wallCollideRight = game.physics.arcade.collide(cherryred, wallRight);
     
-    if (wallCollideLeft||wallCollideRight) {
-        console.log('Collide!');
-    }
+    backgroundUpdate();
     
-    // this is what makes the background scroll
-    highway.tilePosition.y += 10;
-    
-    cherryred.body.velocity.x = 0;
-    cherryred.body.velocity.y = 0;
-    
-    // these are the arrow controls that move the player character
-    if (speed.isDown) {
-        cherryred.body.velocity.y -= 350;
-    }
-    else if (brake.isDown) {
-        cherryred.body.velocity.y += 350;
-    }
-
-    if (left.isDown) {
-        cherryred.body.velocity.x -= 400;
-        cherryred.angle = -10;
-    }
-    else if (right.isDown) {
-        cherryred.body.velocity.x += 400;
-        cherryred.angle = +10;
-    }
-    else {
-        cherryred.rotation = 0;
-    }
+    playerUpdate();
 }
 
 </script>
