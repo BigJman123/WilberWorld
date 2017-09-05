@@ -26,13 +26,21 @@ let cars;
 let wallLeft;
 let wallRight;
 
-let speed = 5;
+let enemyNames;
+let randomName;
 
 function preload() {
     
     playerAssets();
-    enemyAssets();
     backgroundAssets();
+    
+    game.load.image('enemy1', 'assets/car1.png', 136, 300);
+    game.load.image('enemy2', 'assets/car2.png', 138, 299);
+    game.load.image('enemy3', 'assets/car3.png', 136, 300);
+    game.load.image('enemy4', 'assets/car4.png', 143, 300);
+    game.load.image('enemy5', 'assets/car5.png', 149, 300);
+    game.load.image('enemy6', 'assets/car6.png', 149, 300);
+    game.load.image('enemy7', 'assets/car7.png', 149, 300);
     
 }
 
@@ -45,7 +53,19 @@ function create() {
     
     playerCreate();
     
-    enemyCreate();
+    let enemyNames = ['enemy1','enemy2','enemy3','enemy4','enemy5','enemy6','enemy7'];
+    
+    let randomName = Math.floor(Math.random()*enemyNames.length);
+    
+    let enemySpawn = [189, 313, 445, 571];
+    
+    let randomSpawn = Math.floor(Math.random()*enemySpawn.length);
+    
+    setInterval(function() {
+        enemyCreate(enemySpawn[randomSpawn], enemyNames[randomName]);
+    }, 5000);
+    
+    // enemyCreate(enemySpawn[randomSpawn], enemyNames[randomName]);
     
     // makes arrow keys avaliable
     speed = game.input.keyboard.addKey(Phaser.Keyboard.UP);
@@ -64,7 +84,7 @@ function update() {
     
     playerUpdate();
     
-    enemyUpdate();
+    // enemyUpdate();
 }
 
 </script>

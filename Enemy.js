@@ -1,19 +1,48 @@
-function enemyAssets() {
+// Enemy = function (game, x, sprite) {
+//     Phaser.Sprite.call(this, game, x, -200, sprite);
+//     game.physics.enable(this, Phaser.Physics.ARCADE);
+//     this.enableBody = true;
+//     this.body.gravity.y = 20;
+//     this.body.velocity.y = 50;
+// }
+
+// Enemy.prototype = Object.create(Phaser.Sprite.prototype);
+// Enemy.prototype.constructor = Enemy;
+
+// Enemy.prototype.update = function() {
     
-    game.load.image('enemy1', 'assets/car1.png', 1092, 2400);
-    game.load.image('enemy2', 'assets/car2.png', 600, 1255);
-    game.load.image('enemy3', 'assets/car3.png', 405, 800);
+//     game.physics.arcade.collide(this, platforms, function () {
+        
+//     });
+    
+// }
+function enemyCreate(x, sprite) {
+    
+    enemy = game.add.group();
+    enemy.enableBody = true;
+    
+    
+    enemyCar1 = enemy.create(x, -200, sprite);
+    enemyCar1.scale.setTo(.6, .6);
+    enemyCar1.body.gravity.y = 20;
     
 }
 
-function enemyCreate() {
+function resetCar() {
     
+    // enemyCar1.kill();
     
+    // if (enemyCar.kill) {
+    //     console.log('car killed');
+    // }
     
 }
 
 function enemyUpdate() {
     
+    if (enemyCar1) {
+        
+    }   
     
     
 }
