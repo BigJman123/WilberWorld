@@ -26,8 +26,8 @@ let cars;
 let wallLeft;
 let wallRight;
 
-let enemyNames;
-let randomName;
+let enemyNames = ['enemy1','enemy2','enemy3','enemy4','enemy5','enemy6','enemy7'];
+let enemySpawn = [189, 313, 445, 571];
 
 function preload() {
     
@@ -53,17 +53,9 @@ function create() {
     
     playerCreate();
     
-    let enemyNames = ['enemy1','enemy2','enemy3','enemy4','enemy5','enemy6','enemy7'];
-    
-    let randomName = Math.floor(Math.random()*enemyNames.length);
-    
-    let enemySpawn = [189, 313, 445, 571];
-    
-    let randomSpawn = Math.floor(Math.random()*enemySpawn.length);
-    
     setInterval(function() {
-        enemyCreate(enemySpawn[randomSpawn], enemyNames[randomName]);
-    }, 5000);
+        enemyCreate(enemySpawn[Math.floor(Math.random()*enemySpawn.length)], enemyNames[Math.floor(Math.random()*enemyNames.length)]);
+    }, 3000);
     
     // enemyCreate(enemySpawn[randomSpawn], enemyNames[randomName]);
     

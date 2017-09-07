@@ -22,7 +22,7 @@ function enemyCreate(x, sprite) {
     enemy.enableBody = true;
     
     
-    enemyCar1 = enemy.create(x, -200, sprite);
+    enemyCar1 = enemy.create(x, -150, sprite);
     enemyCar1.scale.setTo(.6, .6);
     enemyCar1.body.gravity.y = 20;
     
