@@ -22,11 +22,12 @@ let game = new Phaser.Game(840, 650, Phaser.AUTO, '', { preload: preload, create
 let tileSprite;
 let cherryred;
 let cars;
+let enemy;
 
 let wallLeft;
 let wallRight;
 
-let enemyNames = ['enemy1','enemy2','enemy3','enemy4','enemy5','enemy6','enemy7'];
+let enemyNames = ['car1','car2','car3','car4','car5','car6','car7'];
 let enemySpawn = [189, 313, 445, 571];
 
 function preload() {
@@ -34,13 +35,13 @@ function preload() {
     playerAssets();
     backgroundAssets();
     
-    game.load.image('enemy1', 'assets/car1.png', 136, 300);
-    game.load.image('enemy2', 'assets/car2.png', 138, 299);
-    game.load.image('enemy3', 'assets/car3.png', 136, 300);
-    game.load.image('enemy4', 'assets/car4.png', 143, 300);
-    game.load.image('enemy5', 'assets/car5.png', 149, 300);
-    game.load.image('enemy6', 'assets/car6.png', 149, 300);
-    game.load.image('enemy7', 'assets/car7.png', 149, 300);
+    game.load.image('car1', 'assets/car1.png', 136, 300);
+    game.load.image('car2', 'assets/car2.png', 138, 299);
+    game.load.image('car3', 'assets/car3.png', 136, 300);
+    game.load.image('car4', 'assets/car4.png', 143, 300);
+    game.load.image('car5', 'assets/car5.png', 149, 300);
+    game.load.image('car6', 'assets/car6.png', 149, 300);
+    game.load.image('car7', 'assets/car7.png', 149, 300);
     
 }
 
@@ -53,11 +54,14 @@ function create() {
     
     playerCreate();
     
+    enemy = game.add.group();
+    enemy.enableBody = true;
+    
     setInterval(function() {
         enemyCreate(enemySpawn[Math.floor(Math.random()*enemySpawn.length)], enemyNames[Math.floor(Math.random()*enemyNames.length)]);
-    }, 3000);
+    }, 4000);
     
-    // enemyCreate(enemySpawn[randomSpawn], enemyNames[randomName]);
+    enemyCreate();
     
     // makes arrow keys avaliable
     speed = game.input.keyboard.addKey(Phaser.Keyboard.UP);
@@ -71,6 +75,14 @@ function update() {
     // collision between the car and the right/left walls
     var wallCollideLeft = game.physics.arcade.collide(cherryred, wallLeft);
     var wallCollideRight = game.physics.arcade.collide(cherryred, wallRight);
+    
+    var carsCollide = game.physics.arcade.collide(cherryred, enemy);
+    var carsCollideLeftWall = game.physics.arcade.collide(enemy, wallLeft);
+    var carsCollideRightWall = game.physics.arcade.collide(enemy, wallRight);
+    
+    if (carsCollide) {
+        console.log('cars collide');
+    }
     
     backgroundUpdate();
     

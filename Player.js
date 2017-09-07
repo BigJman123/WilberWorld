@@ -14,6 +14,8 @@ function playerCreate() {
     // enables physics on player
     game.physics.arcade.enable(cherryred);
     cherryred.body.collideWorldBounds = true;
+    cherryred.body.gravity.y = 100;
+
     
 }
 
