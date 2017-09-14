@@ -3,10 +3,13 @@
 <head> 
 	<meta charset="UTF-8" />
 	<title>Race to Wilber World</title>
+	<!--Lodash-->
+	<script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
     <script src="//cdn.jsdelivr.net/phaser/2.6.2/phaser.min.js"></script>
     <script type="text/javascript" src="Player.js"></script>
     <script type="text/javascript" src="Enemy.js"></script>
     <script type="text/javascript" src="Background.js"></script>
+    <script type="text/javascript" src="Powerup.js"></script>
     <style type="text/css">
         body {
             margin: 0;
@@ -22,26 +25,22 @@ let game = new Phaser.Game(840, 650, Phaser.AUTO, '', { preload: preload, create
 let tileSprite;
 let cherryred;
 let cars;
-let enemy;
+let enemyCars;
+let newPowerUp;
 
 let wallLeft;
 let wallRight;
 
-let enemyNames = ['car1','car2','car3','car4','car5','car6','car7'];
+let enemyNames = ['car1','car2','car3','car4','car5','car6','car7', 'car8', 'car9', 'car10'];
 let enemySpawn = [189, 313, 445, 571];
+let powerUpSpawn = [218, 342, 474, 600];
 
 function preload() {
     
     playerAssets();
+    enemyAssets();
     backgroundAssets();
-    
-    game.load.image('car1', 'assets/car1.png', 136, 300);
-    game.load.image('car2', 'assets/car2.png', 138, 299);
-    game.load.image('car3', 'assets/car3.png', 136, 300);
-    game.load.image('car4', 'assets/car4.png', 143, 300);
-    game.load.image('car5', 'assets/car5.png', 149, 300);
-    game.load.image('car6', 'assets/car6.png', 149, 300);
-    game.load.image('car7', 'assets/car7.png', 149, 300);
+    powerUpAssets();
     
 }
 
@@ -56,18 +55,36 @@ function create() {
     
     enemy = game.add.group();
     enemy.enableBody = true;
+    enemy.setAll('outOfBoundsKill', true);
+    enemy.setAll('checkWorldBounds', true);
+    
+    powerUp = game.add.group();
+    powerUp.enableBody = true;
+    powerUp.setAll('outOfBoundsKill', true);
+    powerUp.setAll('checkWorldBounds', true);
     
     setInterval(function() {
-        enemyCreate(enemySpawn[Math.floor(Math.random()*enemySpawn.length)], enemyNames[Math.floor(Math.random()*enemyNames.length)]);
-    }, 4000);
+        carOrPowerup();
+    }, 3000);
     
-    enemyCreate();
+    // setInterval(function() {
+    //     powerUpCreate(_.sample(powerUpSpawn));
+    // }, 3000);
     
     // makes arrow keys avaliable
     speed = game.input.keyboard.addKey(Phaser.Keyboard.UP);
     brake = game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
     right = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
     left = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
+}
+
+function carOrPowerup() {
+    if(_.random(1, 15) === 1) {
+        powerUpCreate(_.sample(powerUpSpawn));
+    }
+    else {
+        enemyCreate(_.sample(enemySpawn), _.sample(enemyNames));
+    }
 }
 
 function update() {
@@ -80,13 +97,15 @@ function update() {
     var carsCollideLeftWall = game.physics.arcade.collide(enemy, wallLeft);
     var carsCollideRightWall = game.physics.arcade.collide(enemy, wallRight);
     
-    if (carsCollide) {
-        console.log('cars collide');
+    var powerUpCollide = game.physics.arcade.collide(cherryred, newPowerUp);
+    
+    if(powerUpCollide) {
+        newPowerUp.destroy();
     }
     
-    backgroundUpdate();
-    
     playerUpdate();
+    
+    backgroundUpdate();
     
     // enemyUpdate();
 }
