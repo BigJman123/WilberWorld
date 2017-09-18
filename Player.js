@@ -7,9 +7,9 @@ function playerAssets() {
 function playerCreate() {
     
     // adds player car to the game
-    cherryred = game.add.sprite(487, 450, 'cherryred');
+    cherryred = game.add.sprite(625, 1000, 'cherryred');
     cherryred.anchor.setTo(0.5, 0.5);
-    cherryred.scale.setTo(.6, .6);
+    cherryred.scale.setTo(.8, .8);
     
     // enables physics on player
     game.physics.arcade.enable(cherryred);
