@@ -3,7 +3,8 @@ function backgroundAssets() {
     game.load.image('highway', 'assets/road.png', 840, 650);
     game.load.image('highway2', 'assets/road2.png', 1024, 768);
     game.load.image('highway3', 'assets/road3.png', 1080, 1920);
-    game.load.image('wall', 'assets/wall.png', 300, 650);
+    game.load.image('wall', 'assets/wall.png', 300, 1920);
+    game.load.image('wall2', 'assets/wall2.png', 300, 1920);
     
 }
 
@@ -15,10 +16,10 @@ function backgroundCreate() {
     bounds = game.add.group();
     bounds.enableBody = true;
     
-    wallLeft = bounds.create(-115, 0, 'wall');
+    wallLeft = bounds.create(-123, 0, 'wall');
     wallLeft.body.immovable = true;
     
-    wallRight = bounds.create(860, 0, 'wall');
+    wallRight = bounds.create(910, 0, 'wall');
     wallRight.body.immovable = true;
     
 }
