@@ -26,10 +26,10 @@ function playerUpdate() {
     
     // these are the arrow controls that move the player character
     if (speed.isDown) {
-        cherryred.body.velocity.y -= 350;
+        cherryred.body.velocity.y -= 500;
     }
     else if (brake.isDown) {
-        cherryred.body.velocity.y += 350;
+        cherryred.body.velocity.y += 500;
     }
 
     if (left.isDown) {

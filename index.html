@@ -26,6 +26,7 @@ let tileSprite;
 let cherryred;
 let cars;
 let enemyCars;
+let carsCollide;
 let newPowerUp;
 
 let wallLeft;
@@ -57,6 +58,8 @@ function create() {
     enemy.enableBody = true;
     enemy.setAll('outOfBoundsKill', true);
     enemy.setAll('checkWorldBounds', true);
+    
+    // explosion = game.add.sprite(96, 96, 'explosion');
     
     powerUp = game.add.group();
     powerUp.enableBody = true;
@@ -98,6 +101,11 @@ function update() {
     var carsCollideRightWall = game.physics.arcade.collide(enemy, wallRight);
     
     var powerUpCollide = game.physics.arcade.collide(cherryred, newPowerUp);
+    
+    if(carsCollide) {
+        enemyCars.destroy();
+        console.log('hello');
+    }
     
     if(powerUpCollide) {
         newPowerUp.destroy();
