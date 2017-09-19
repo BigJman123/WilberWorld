@@ -23,10 +23,18 @@
 let game = new Phaser.Game(1080, 1920, Phaser.AUTO, '', { preload: preload, create: create, update: update });
 
 let tileSprite;
+
 let cherryred;
+let speed;
+let brake;
+let left;
+let right;
+
 let cars;
 let enemyCars;
+let explosion;
 let carsCollide;
+
 let newPowerUp;
 
 let wallLeft;
@@ -59,7 +67,10 @@ function create() {
     enemy.setAll('outOfBoundsKill', true);
     enemy.setAll('checkWorldBounds', true);
     
-    // explosion = game.add.sprite(96, 96, 'explosion');
+    // let explosion = game.add.sprite(96, 96, 'explosion');
+    // let boom = explosion.animations.add('boom');
+    // explosion.scale.setTo(2.5, 2.5);
+    // explosion.animations.play('boom', 30, true);
     
     powerUp = game.add.group();
     powerUp.enableBody = true;
@@ -96,20 +107,45 @@ function update() {
     var wallCollideLeft = game.physics.arcade.collide(cherryred, wallLeft);
     var wallCollideRight = game.physics.arcade.collide(cherryred, wallRight);
     
-    var carsCollide = game.physics.arcade.collide(cherryred, enemy);
+    var carsCollide = game.physics.arcade.collide(enemy, cherryred, function(car, enemy) {
+        
+        // destroy enemy car
+        enemy.destroy();
+        
+        // cause explosion
+            let explosion = game.add.sprite(enemy.x - 55, enemy.y, 'explosion');
+            let boom = explosion.animations.add('boom');
+            explosion.scale.setTo(2.5, 2.5);
+            explosion.animations.play('boom', 30, false, true);
+        
+        
+        // game canvas will flash red
+        game.camera.flash(0xff0000, 200);
+        
+        
+        // loging enemy car x/y location
+        console.log(enemy.x, enemy.y);
+    });
+    
+    function makeInvincible() {
+        invincible = true;
+        cherryred.alpha = 0.5;
+    }
+
+    function notInvincible() {
+        invincible = false;
+        cherryred.alpha = 1;
+    }
+    
     var carsCollideLeftWall = game.physics.arcade.collide(enemy, wallLeft);
     var carsCollideRightWall = game.physics.arcade.collide(enemy, wallRight);
     
-    var powerUpCollide = game.physics.arcade.collide(cherryred, newPowerUp);
+    var powerUpCollide = game.physics.arcade.collide(powerUp, cherryred, function(car, powerup) {powerUp.destroy();});
     
-    if(carsCollide) {
-        enemyCars.destroy();
-        console.log('hello');
-    }
     
-    if(powerUpCollide) {
-        newPowerUp.destroy();
-    }
+    // if(powerUpCollide) {
+    //     newPowerUp.destroy();
+    // }
     
     playerUpdate();
     

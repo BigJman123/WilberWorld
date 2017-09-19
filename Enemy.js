@@ -9,7 +9,7 @@ function enemyAssets() {
     game.load.image('car8', 'assets/car8.png', 149, 300);
     game.load.image('car9', 'assets/car9.png', 149, 300);
     game.load.image('car10', 'assets/car10.png', 149, 300);
-    // game.load.spritesheet('explosion', 'assets/explosion.png', 96, 96);
+    game.load.spritesheet('explosion', 'assets/explosion.png', 96, 96);
 }
 
 function enemyCreate(x, sprite) {
