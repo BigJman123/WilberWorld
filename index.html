@@ -25,6 +25,7 @@ let game = new Phaser.Game(1080, 1920, Phaser.AUTO, '', { preload: preload, crea
 let tileSprite;
 
 let cherryred;
+// let lives = 3;
 let speed;
 let brake;
 let left;
@@ -67,11 +68,6 @@ function create() {
     enemy.setAll('outOfBoundsKill', true);
     enemy.setAll('checkWorldBounds', true);
     
-    // let explosion = game.add.sprite(96, 96, 'explosion');
-    // let boom = explosion.animations.add('boom');
-    // explosion.scale.setTo(2.5, 2.5);
-    // explosion.animations.play('boom', 30, true);
-    
     powerUp = game.add.group();
     powerUp.enableBody = true;
     powerUp.setAll('outOfBoundsKill', true);
@@ -84,6 +80,10 @@ function create() {
     // setInterval(function() {
     //     powerUpCreate(_.sample(powerUpSpawn));
     // }, 3000);
+    
+    lives = 3;
+    
+    text = game.add.text(25, 1820, 'Lives: ' + lives, { fontSize: '35px', fill: '#000' });
     
     // makes arrow keys avaliable
     speed = game.input.keyboard.addKey(Phaser.Keyboard.UP);
@@ -123,18 +123,29 @@ function update() {
         game.camera.flash(0xff0000, 200);
         
         
+        playerLives();
+        
         // loging enemy car x/y location
         console.log(enemy.x, enemy.y);
+    
+        
     });
     
-    function makeInvincible() {
-        invincible = true;
-        cherryred.alpha = 0.5;
-    }
-
-    function notInvincible() {
-        invincible = false;
-        cherryred.alpha = 1;
+    function playerLives() {
+        
+        lives--;
+            
+        text.setText("Lives: " + lives);
+            
+        if(lives === 0) {
+            cherryred.kill();
+            
+            setTimeout(() => game.add.text(325, 800, 'Game Over', { fontSize: '75px', fill: '#000' }), 1500);
+            
+            setTimeout(() => {window.location = 'index.html'}, 3500);
+        }
+        
+        console.log(lives);
     }
     
     var carsCollideLeftWall = game.physics.arcade.collide(enemy, wallLeft);
