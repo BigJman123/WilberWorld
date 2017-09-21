@@ -1,0 +1,55 @@
+<!doctype html> 
+<html lang="en"> 
+<head> 
+	<meta charset="UTF-8" />
+	<title>Race to Wilber World</title>
+    <script src="//cdn.jsdelivr.net/phaser/2.6.2/phaser.min.js"></script>
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+<script type="text/javascript">
+
+var game = new Phaser.Game(800, 600, Phaser.CANVAS, 'phaser-example', { preload: preload, create: create, render: render });
+
+var timer;
+var minute = 60;
+
+function preload() {
+}
+
+function create() {
+    //  Create our Timer
+    timer = game.time.create(false);
+
+    //  Set a TimerEvent to occur after 1 seconds
+    timer.loop(1000, updateCounter, this);
+
+    //  Start the timer running - this is important!
+    //  It won't start automatically, allowing you to hook it to button events and the like.
+    timer.start();
+}
+
+function updateCounter() {
+
+    minute--;
+    
+    // game.add.text(450, 100, 'Time: ' + minute--, { fontSize: '50px', fill: '#fff' });
+
+}
+
+function render() {
+
+    game.debug.text('Time until event: ' + timer.duration.toFixed(0), 32, 32);
+    game.debug.text('Loop Count: ' + minute, 32, 64);
+
+}
+
+</script>
+
+</body>
+</html>
