@@ -10,6 +10,7 @@
     <script type="text/javascript" src="Enemy.js"></script>
     <script type="text/javascript" src="Background.js"></script>
     <script type="text/javascript" src="Powerup.js"></script>
+    <script type="text/javascript" src="Lives.js"></script>
     <style type="text/css">
         body {
             margin: 0;
@@ -25,7 +26,7 @@ let game = new Phaser.Game(1080, 1920, Phaser.AUTO, '', { preload: preload, crea
 let tileSprite;
 
 let cherryred;
-// let lives = 3;
+let lives = 3;
 let speed;
 let brake;
 let left;
@@ -81,8 +82,6 @@ function create() {
     //     powerUpCreate(_.sample(powerUpSpawn));
     // }, 3000);
     
-    lives = 3;
-    
     text = game.add.text(25, 1820, 'Lives: ' + lives, { fontSize: '35px', fill: '#000' });
     
     // makes arrow keys avaliable
@@ -123,30 +122,12 @@ function update() {
         game.camera.flash(0xff0000, 200);
         
         
-        playerLives();
+        livesCreate();
         
         // loging enemy car x/y location
         console.log(enemy.x, enemy.y);
-    
         
     });
-    
-    function playerLives() {
-        
-        lives--;
-            
-        text.setText("Lives: " + lives);
-            
-        if(lives === 0) {
-            cherryred.kill();
-            
-            setTimeout(() => game.add.text(325, 800, 'Game Over', { fontSize: '75px', fill: '#000' }), 1500);
-            
-            setTimeout(() => {window.location = 'index.html'}, 3500);
-        }
-        
-        console.log(lives);
-    }
     
     var carsCollideLeftWall = game.physics.arcade.collide(enemy, wallLeft);
     var carsCollideRightWall = game.physics.arcade.collide(enemy, wallRight);
