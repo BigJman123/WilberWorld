@@ -5,6 +5,7 @@ function backgroundAssets() {
     game.load.image('highway3', 'assets/road3.png', 1080, 1920);
     game.load.image('wall', 'assets/wall.png', 300, 1920);
     game.load.image('wall2', 'assets/wall2.png', 300, 1920);
+    game.load.image('black', 'assets/black.png', 1080, 1920);
     
 }
 
