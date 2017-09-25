@@ -5,8 +5,7 @@ function timerCreate() {
     //  Set a TimerEvent to occur after 1 seconds
     timer.loop(Phaser.Timer.SECOND, updateCounter, this);
 
-    //  Start the timer running - this is important!
-    //  It won't start automatically, allowing you to hook it to button events and the like.
+    //  Start the timer running
     timer.start();
 }
 
@@ -16,6 +15,6 @@ function updateCounter() {
 
     timerText.setText("Time: " + minute);
     
-    console.log(minute);
+    // console.log(minute);
 
 }
