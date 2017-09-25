@@ -38,8 +38,9 @@ let enemyCars;
 let explosion;
 let carsCollide;
 
-// let timer;
-// let minute = 60;
+let timer;
+let timerText;
+let minute = 60;
 
 let newPowerUp;
 
@@ -88,9 +89,9 @@ function create() {
     
     text = game.add.text(25, 1820, 'Lives: ' + lives, { fontSize: '35px', fill: '#000' });
     
-    // game.add.text(450, 100, 'Time: ' + minute, { fontSize: '50px', fill: '#00'});
+    timerText = game.add.text(450, 100, 'Time: ' + minute, { fontSize: '50px', fill: '#00'});
     
-    // timerCreate();
+    timerCreate();
     
     // makes arrow keys avaliable
     speed = game.input.keyboard.addKey(Phaser.Keyboard.UP);

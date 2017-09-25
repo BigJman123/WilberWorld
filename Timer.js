@@ -13,6 +13,8 @@ function timerCreate() {
 function updateCounter() {
 
     minute--;
+
+    timerText.setText("Time: " + minute);
     
     console.log(minute);
 
