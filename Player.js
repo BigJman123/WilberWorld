@@ -18,7 +18,7 @@ function playerCreate() {
     // sets a timeout of 2 seconds for the cherryred to recieve collision with world bounds
     setTimeout(() => {cherryred.body.collideWorldBounds = true}, 3000);
     
-    playerTween = game.add.tween(cherryred).to({y: 1000}, 2000, Phaser.Easing.Sinusoidal.Out, true);
+    playerTween = game.add.tween(cherryred).to({y: 1000}, 2000, Phaser.Easing.Quadratic.Out, true);
 
     
 }
