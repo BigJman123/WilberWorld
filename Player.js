@@ -18,7 +18,7 @@ function playerCreate() {
     // sets a timeout of 2 seconds for the cherryred to recieve collision with world bounds
     setTimeout(() => {cherryred.body.collideWorldBounds = true}, 3000);
     
-    playerTween = game.add.tween(cherryred).to({y: 1000}, 3000, Phaser.Easing.Linear.None, true);
+    playerTween = game.add.tween(cherryred).to({y: 1000}, 2000, Phaser.Easing.Sinusoidal.Out, true);
 
     
 }
@@ -35,15 +35,15 @@ function playerUpdate() {
         cherryred.body.velocity.y -= 500;
         }
         else if (brake.isDown) {
-            cherryred.body.velocity.y += 500;
+            cherryred.body.velocity.y += 700;
         }
     
         if (left.isDown) {
-            cherryred.body.velocity.x -= 400;
+            cherryred.body.velocity.x -= 600;
             cherryred.angle = -10;
         }
         else if (right.isDown) {
-            cherryred.body.velocity.x += 400;
+            cherryred.body.velocity.x += 600;
             cherryred.angle = +10;
         }
         else {
