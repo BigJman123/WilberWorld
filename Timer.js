@@ -6,7 +6,8 @@ function timerCreate() {
     timer.loop(Phaser.Timer.SECOND, updateCounter, this);
 
     //  Start the timer running
-    timer.start();
+    setTimeout(() => {timer.start();}, 8000);
+    
 }
 
 function updateCounter() {

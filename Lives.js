@@ -1,6 +1,6 @@
 function livesCreate() {
     lives--;
-            
+    
     text.setText("Lives: " + lives);
         
     if(lives === 0) {
