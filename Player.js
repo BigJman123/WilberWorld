@@ -49,6 +49,6 @@ function playerUpdate() {
         else {
             cherryred.rotation = 0;
         }
-    }, 8000);
+    }, 7000);
     
 }
