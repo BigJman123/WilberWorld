@@ -1,7 +1,7 @@
 function livesCreate() {
     lives--;
     
-    text.setText("Lives: " + lives);
+    livesText.setText("Lives: " + lives);
         
     if(lives === 0) {
         let explosion = game.add.sprite(cherryred.x - 115, cherryred.y - 100, 'explosion');
