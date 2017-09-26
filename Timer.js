@@ -19,3 +19,11 @@ function updateCounter() {
     // console.log(minute);
 
 }
+
+function timerUpdate() {
+    if(minute === 0) {
+        timer.stop();
+        
+        setTimeout(() => {window.location = 'win.html'}, 500);
+    }
+}

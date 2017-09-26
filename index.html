@@ -47,7 +47,7 @@ let carsCollide;
 
 let timer;
 let timerText;
-let minute = 60;
+let minute = 20;
 
 let newPowerUp;
 
@@ -129,11 +129,11 @@ function create() {
     }, 6750);
     
     setTimeout(() => {
-        livesText = game.add.text(25, 1820, 'Lives: ' + lives, { fontSize: '35px', fill: '#000' });
+        livesText = game.add.text(25, 1820, 'Lives: ' + lives, { fontSize: '35px', fill: '#fff' });
     }, 7000);
     
     setTimeout(() => {
-        timerText = game.add.text(450, 100, 'Time: ' + minute, { fontSize: '50px', fill: '#00'});
+        timerText = game.add.text(450, 100, 'Time: ' + minute, { fontSize: '50px', fill: '#fff'});
     }, 7000);
     
     timerCreate();
@@ -195,6 +195,8 @@ function update() {
     playerUpdate();
     
     backgroundUpdate();
+    
+    timerUpdate();
     
     // enemyUpdate();
 }
