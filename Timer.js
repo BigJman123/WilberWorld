@@ -24,6 +24,13 @@ function timerUpdate() {
     if(minute === 0) {
         timer.stop();
         
-        setTimeout(() => {window.location = 'win.html'}, 500);
+        enemy.destroy();
+        
+        
+        // let explosion = game.add.sprite(enemy.x - 55, enemy.y, 'explosion');
+        // let boom = explosion.animations.add('boom');
+        // explosion.scale.setTo(2.5, 2.5);
+        // explosion.animations.play('boom', 30, false, true);
+        // setTimeout(() => {window.location = 'win.html'}, 500);
     }
 }
