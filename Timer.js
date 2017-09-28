@@ -22,9 +22,17 @@ function updateCounter() {
 
 function timerUpdate() {
     if(minute === 0) {
-        timer.stop();
         
         enemy.destroy();
+        
+        timer.stop();
+        
+        livesText.kill();
+        timerText.kill();
+        
+        // setTimeout(() => {
+        //   game.add.tween(cherryred).to({y: -1000}, 2000, Phaser.Easing.Quadratic.Out, true); 
+        // }, 3000);
         
         
         // let explosion = game.add.sprite(enemy.x - 55, enemy.y, 'explosion');

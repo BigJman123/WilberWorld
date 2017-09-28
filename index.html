@@ -156,6 +156,13 @@ function carOrPowerup() {
 
 function update() {
     
+    if(minute > 0) {
+        setTimeout(() => {cherryred.body.collideWorldBounds = true}, 3000);
+    }
+    else {
+        cherryred.body.collideWorldBounds = false;
+    }
+    
     // collision between the car and the right/left walls
     var wallCollideLeft = game.physics.arcade.collide(cherryred, wallLeft);
     var wallCollideRight = game.physics.arcade.collide(cherryred, wallRight);
