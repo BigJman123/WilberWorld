@@ -1,3 +1,5 @@
+let playerControlsEnabled = false;
+
 function playerAssets() {
     
     game.load.image('cherryred', 'assets/cherryred.png', 149, 300);
@@ -37,7 +39,7 @@ function playerUpdate() {
     
     // these are the arrow controls that move the player character
     
-    setTimeout(() => {
+    if (playerControlsEnabled) {
         if (speed.isDown) {
         cherryred.body.velocity.y -= 500;
         }
@@ -56,6 +58,6 @@ function playerUpdate() {
         else {
             cherryred.rotation = 0;
         }
-    }, 7000);
+    }
     
 }

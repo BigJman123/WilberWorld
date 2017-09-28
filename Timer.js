@@ -1,3 +1,5 @@
+var endOfLevel = false;
+
 function timerCreate() {
     //  Create our Timer
     timer = game.time.create(false);
@@ -21,24 +23,24 @@ function updateCounter() {
 }
 
 function timerUpdate() {
-    if(minute === 0) {
+    if(! endOfLevel && minute === 0) {
         
-        enemy.destroy();
+        
+        endOfLevel = true;
+        playerControlsEnabled = false;
+        cherryred.angle = 0;
+
+        enemyDestroyAll();
         
         timer.stop();
         
         livesText.kill();
         timerText.kill();
         
-        // setTimeout(() => {
-        //   game.add.tween(cherryred).to({y: -1000}, 2000, Phaser.Easing.Quadratic.Out, true); 
-        // }, 3000);
-        
-        
-        // let explosion = game.add.sprite(enemy.x - 55, enemy.y, 'explosion');
-        // let boom = explosion.animations.add('boom');
-        // explosion.scale.setTo(2.5, 2.5);
-        // explosion.animations.play('boom', 30, false, true);
-        // setTimeout(() => {window.location = 'win.html'}, 500);
+        setTimeout(() => {
+          game.add.tween(cherryred).to({y: -500}, 2000, Phaser.Easing.Quadratic.In, true); 
+        }, 3000);
+
+        // setTimeout(() => {window.location = 'win.html'}, 6000);
     }
 }
