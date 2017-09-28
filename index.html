@@ -87,10 +87,18 @@ function create() {
     powerUp.setAll('outOfBoundsKill', true);
     
     setTimeout(() => {
-        enemyInterval = setInterval(function() {
-        enemyCreate(_.sample(enemySpawn), _.sample(enemyNames));
-        }, 2000);
-    }, 3000);
+        // enemyInterval = setInterval(function() {
+        // enemyCreate(_.sample(enemySpawn), _.sample(enemyNames));
+        // }, 2000);
+
+
+        setDeceleratingTimeout(function(i) {
+            // determine x and sprite to use
+            // use i to determine gravity and velocity
+            enemyCreate(_.sample(enemySpawn), _.sample(enemyNames), i);
+        }, 10, 50);
+
+    }, 8000);
     
     // setInterval(function() {
     //     powerUpCreate(_.sample(powerUpSpawn));

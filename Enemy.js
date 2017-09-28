@@ -12,13 +12,13 @@ function enemyAssets() {
     game.load.spritesheet('explosion', 'assets/explosion.png', 96, 96);
 }
 
-function enemyCreate(x, sprite) {
+function enemyCreate(x, sprite, multiplier) {
 
     enemyCars = enemy.create(x, -350, sprite);
     enemyCars.scale.setTo(.8, .8);
     enemyCars.body.immovable = true;
-    enemyCars.body.gravity.y = (64 - minute) * 25;
-    enemyCars.body.velocity.y = (64 - minute) * 25;
+    enemyCars.body.gravity.y = (50 - multiplier) * 10;
+    enemyCars.body.velocity.y = (50 - multiplier) * 10;
     
 }
 
@@ -40,10 +40,12 @@ function enemyDestroyAll() {
 
     let enemies = enemy.children;
 
+    // stop any further enemies from spawning
+    enemySpawnTimes.forEach(function(id) {
+        clearTimeout(id);
+    });
+
     clearInterval(enemyInterval);
-    // if there was a slight delay between each enemy
-    // exploding instead of one big bang
-    console.log(enemies.length);
 
     enemies.forEach(function(enemy, i) {
         let e = enemy;
@@ -54,11 +56,7 @@ function enemyDestroyAll() {
 }
 
 function enemyUpdate() {
-    // if(carsCollide) {
-        // enemyCars.kill();
-        // explosion.animations.add('explosion', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], 5, true);
-        // explosion.play('explosion', 5, false, true);
-    // }
+ 
     let height = game.world.bounds.height + 500;
 
     let enemies = enemy.children;
@@ -66,3 +64,23 @@ function enemyUpdate() {
         enemy.y > height && enemy.destroy();
     })
 }
+
+
+
+let enemySpawnTimes = [];
+
+
+// helper function
+function setDeceleratingTimeout(callback, factor, times)
+{
+    var internalCallback = function(tick, counter) {
+        return function() {
+            if (--tick >= 0) {
+                window.setTimeout(internalCallback, --counter * factor);
+                callback(tick);
+            }
+        }
+    }(times, 100);
+
+    enemySpawnTimes.push(window.setTimeout(internalCallback, factor));
+};
