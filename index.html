@@ -44,10 +44,11 @@ let cars;
 let enemyCars;
 let explosion;
 let carsCollide;
+let enemyInterval;
 
 let timer;
 let timerText;
-let minute = 10;
+let minute = 50;
 
 let newPowerUp;
 
@@ -78,19 +79,17 @@ function create() {
     
     enemy = game.add.group();
     enemy.enableBody = true;
-    enemy.setAll('outOfBoundsKill', true);
-    enemy.setAll('checkWorldBounds', true);
     
     powerUp = game.add.group();
     powerUp.enableBody = true;
-    powerUp.setAll('outOfBoundsKill', true);
     powerUp.setAll('checkWorldBounds', true);
+    powerUp.setAll('outOfBoundsKill', true);
     
     setTimeout(() => {
-        setInterval(function() {
+        enemyInterval = setInterval(function() {
         carOrPowerup();
-        }, 3000);
-    }, 2500);
+        }, 1000);
+    }, 3000);
     
     // setInterval(function() {
     //     powerUpCreate(_.sample(powerUpSpawn));
@@ -122,6 +121,7 @@ function create() {
     
     setTimeout(() => { 
         go = game.add.text(460, 300, 'GO!', { fontSize: '100px', fill: '#fff' });
+        playerControlsEnabled = true;
     }, 6250);
     
     setTimeout(() => {
@@ -156,24 +156,20 @@ function carOrPowerup() {
 
 function update() {
     
+    if(minute > 0) {
+        setTimeout(() => {cherryred.body.collideWorldBounds = true}, 3000);
+    }
+    else {
+        cherryred.body.collideWorldBounds = false;
+    }
+    
     // collision between the car and the right/left walls
     var wallCollideLeft = game.physics.arcade.collide(cherryred, wallLeft);
     var wallCollideRight = game.physics.arcade.collide(cherryred, wallRight);
     
     var carsCollide = game.physics.arcade.collide(enemy, cherryred, function(car, enemy) {
         
-        // destroy enemy car
-        enemy.destroy();
-        
-        // cause explosion
-            let explosion = game.add.sprite(enemy.x - 55, enemy.y, 'explosion');
-            let boom = explosion.animations.add('boom');
-            explosion.scale.setTo(2.5, 2.5);
-            explosion.animations.play('boom', 30, false, true);
-        
-        
-        // game canvas will flash red
-        game.camera.flash(0xff0000, 200);
+        enemyDestroy(enemy);
         
         livesCreate();
         
@@ -198,7 +194,7 @@ function update() {
     
     timerUpdate();
     
-    // enemyUpdate();
+    enemyUpdate();
 }
 
 </script>

@@ -1,3 +1,5 @@
+let playerControlsEnabled = false;
+
 function playerAssets() {
     
     game.load.image('cherryred', 'assets/cherryred.png', 149, 300);
@@ -16,7 +18,7 @@ function playerCreate() {
     cherryred.body.gravity.y = 100;
     
     // sets a timeout of 2 seconds for the cherryred to recieve collision with world bounds
-    setTimeout(() => {cherryred.body.collideWorldBounds = true}, 3000);
+    
     
     playerTween = game.add.tween(cherryred).to({y: 1000}, 2000, Phaser.Easing.Quadratic.Out, true);
 
@@ -25,12 +27,19 @@ function playerCreate() {
 
 function playerUpdate() {
     
+    // if(minute > 0) {
+    //     setTimeout(() => {cherryred.body.collideWorldBounds = true}, 3000);
+    // }
+    // else {
+    //     cherryred.body.collideWorldBounds = false;
+    // }
+    
     cherryred.body.velocity.x = 0;
     cherryred.body.velocity.y = 0;
     
     // these are the arrow controls that move the player character
     
-    setTimeout(() => {
+    if (playerControlsEnabled) {
         if (speed.isDown) {
         cherryred.body.velocity.y -= 500;
         }
@@ -49,6 +58,6 @@ function playerUpdate() {
         else {
             cherryred.rotation = 0;
         }
-    }, 7000);
+    }
     
 }
