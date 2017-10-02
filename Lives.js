@@ -11,9 +11,11 @@ function livesCreate() {
         
         cherryred.kill();
         
-        setTimeout(() => game.add.text(325, 800, 'Game Over', { fontSize: '75px', fill: '#000' }), 1500);
+        // setTimeout(() => game.add.text(325, 800, 'Game Over', { fontSize: '75px', fill: '#000' }), 1500);
         
-        setTimeout(() => {window.location = 'index.html'}, 3500);
+        // setTimeout(() => gameOverText = game.add.text(350, 1000, 'Retry?: ' + gameover, { fontSize: '75px', fill: '#000' }), 1500);
+        
+        // setTimeout(() => {window.location = 'index.html'}, 3500);
     }
     
     console.log(lives);

@@ -1,20 +1,23 @@
 function gameOverTimerCreate() {
+    
     //  Create our Timer
-    timer = game.time.create(false);
+    gameOverTimer = game.time.create(false);
 
     //  Set a TimerEvent to occur after 1 seconds
-    timer.loop(Phaser.Timer.SECOND, updateCounter, this);
+    gameOverTimer.loop(Phaser.Timer.SECOND, gameOverUpdateCounter, this);
 
     //  Start the timer running
-    timer.start();
+    gameOverTimer.start();
+    
+    // console.log('hey');
     
 }
 
-function updateCounter() {
+function gameOverUpdateCounter() {
 
-    minute--;
+    gameover--;
 
-    timerText.setText("Retry?: " + minute);
+    gameOverText.setText("Retry?: " + gameover);
     
     // console.log(minute);
 

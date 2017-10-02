@@ -13,6 +13,8 @@
     <script type="text/javascript" src="Lives.js"></script>
     <script type="text/javascript" src="Timer.js"></script>
     <script type="text/javascript" src="TimeoutText.js"></script>
+    <script type="text/javascript" src="GameOver.js"></script>
+    <script type="text/javascript" src="GameOverTimer.js"></script>
     <style type="text/css">
         body {
             margin: 0;
@@ -51,6 +53,10 @@ let timer;
 let timerText;
 let minute = 60;
 
+let gameOverTimer;
+let gameOverText;
+let gameover = 5;
+
 let newPowerUp;
 
 let wallLeft;
@@ -83,8 +89,8 @@ function create() {
     
     powerUp = game.add.group();
     powerUp.enableBody = true;
-    powerUp.setAll('checkWorldBounds', true);
-    powerUp.setAll('outOfBoundsKill', true);
+    // powerUp.setAll('checkWorldBounds', true);
+    // powerUp.setAll('outOfBoundsKill', true);
     
     setTimeout(() => {
         // enemyInterval = setInterval(function() {
@@ -107,6 +113,12 @@ function create() {
     timeoutText();
     
     timerCreate();
+    
+    gameOver();
+    
+    // debugger;
+    
+    gameOverTimerCreate();
     
     // makes arrow keys avaliable
     speed = game.input.keyboard.addKey(Phaser.Keyboard.UP);
