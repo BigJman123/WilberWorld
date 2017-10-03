@@ -25,6 +25,8 @@ function updateCounter() {
 function timerUpdate() {
     if(! endOfLevel && minute === 0) {
         
+        black = game.add.image(0, 0, 'black');
+        black.alpha = 0;
         
         endOfLevel = true;
         playerControlsEnabled = false;
@@ -40,7 +42,11 @@ function timerUpdate() {
         setTimeout(() => {
           game.add.tween(cherryred).to({y: -500}, 2000, Phaser.Easing.Quadratic.In, true); 
         }, 3000);
+        
+        setTimeout(() => {
+            game.add.tween(black).to({ alpha: 1 }, 2000, Phaser.Easing.Linear.None, true, 0, 0, false);
+        }, 5000);
 
-        // setTimeout(() => {window.location = 'win.html'}, 6000);
+        setTimeout(() => {window.location = 'win.html'}, 7000);
     }
 }

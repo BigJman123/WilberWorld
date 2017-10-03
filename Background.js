@@ -6,6 +6,7 @@ function backgroundAssets() {
     game.load.image('wall', 'assets/wall.png', 300, 1920);
     game.load.image('wall2', 'assets/wall2.png', 300, 1920);
     game.load.image('black', 'assets/black.png', 1080, 1920);
+    game.load.image('win', 'assets/win.png', 1080, 1920);
     
 }
 
