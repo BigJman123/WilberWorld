@@ -17,8 +17,8 @@ function enemyCreate(x, sprite, multiplier) {
     enemyCars = enemy.create(x, -350, sprite);
     enemyCars.scale.setTo(.8, .8);
     enemyCars.body.immovable = true;
-    enemyCars.body.gravity.y = (50 - multiplier) * 10;
-    enemyCars.body.velocity.y = (50 - multiplier) * 10;
+    enemyCars.body.gravity.y = (50 - multiplier) * 12;
+    enemyCars.body.velocity.y = (50 - multiplier) * 8;
     
 }
 
