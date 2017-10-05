@@ -76,7 +76,7 @@ function create() {
     // starts physics
     game.physics.startSystem(Phaser.Physics.ARCADE);
     
-    game.physics.arcade.gravity.y = 100;
+    game.physics.arcade.gravity.y = 200;
     
     backgroundCreate();
     
@@ -90,19 +90,26 @@ function create() {
     powerUp.setAll('checkWorldBounds', true);
     powerUp.setAll('outOfBoundsKill', true);
     
-    setTimeout(() => {
-        // enemyInterval = setInterval(function() {
-        // enemyCreate(_.sample(enemySpawn), _.sample(enemyNames));
-        // }, 2000);
+    // setTimeout(() => {
+    //     // enemyInterval = setInterval(function() {
+    //     // enemyCreate(_.sample(enemySpawn), _.sample(enemyNames));
+    //     // }, 2000);
 
 
-        setDeceleratingTimeout(function(i) {
-            // determine x and sprite to use
-            // use i to determine gravity and velocity
-            enemyCreate(_.sample(enemySpawn), _.sample(enemyNames), i);
-        }, 12, 63);
+    //     setDeceleratingTimeout(function(i) {
+    //         // determine x and sprite to use
+    //         // use i to determine gravity and velocity
+    //         enemyCreate(_.sample(enemySpawn), _.sample(enemyNames), i);
+    //     }, 12, 63);
 
-    }, 5000);
+    // }, 5000);
+
+// setTimeout(function() {
+//     setInterval(function() {
+//         enemyCreate(_.sample(enemySpawn), _.sample(enemyNames));
+//     }, 1000);
+// }, 5000)
+    
     
     // setInterval(function() {
     //     powerUpCreate(_.sample(powerUpSpawn));
@@ -117,6 +124,42 @@ function create() {
     brake = game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
     right = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
     left = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
+}
+
+let spawner = [];
+let lastTime = 1;
+
+let updateGlobals = function(time) {
+
+    if (time === 60) return;
+
+    let tick = 61 - time;
+
+    let worldGravity = 200 + (tick * 16.6);
+    let spawnDelay = 1000 - (tick * 10);
+    let roadSpeed = 18 + (tick * .36);
+
+    game.physics.arcade.gravity.y = worldGravity;
+    // delay wait on
+    backgroundSpeed = roadSpeed;
+
+    // only call once per second
+    if (time === lastTime) return;
+    lastTime = time;
+
+    // delay one tick before destroying last spawner
+
+    if (spawner.length > 1) {
+        clearInterval(spawner.shift());
+    }
+
+    let spawn = setInterval(function() {
+        enemyCreate(_.sample(enemySpawn), _.sample(enemyNames));
+    }, spawnDelay);
+
+    spawner.push(spawn);
+    console.log(spawner);
+
 }
 
 // function carOrPowerup() {
@@ -136,6 +179,8 @@ function update() {
     else {
         cherryred.body.collideWorldBounds = false;
     }
+
+    updateGlobals(minute);
     
     // collision between the car and the right/left walls
     var wallCollideLeft = game.physics.arcade.collide(cherryred, wallLeft);
@@ -164,7 +209,7 @@ function update() {
     
     playerUpdate();
     
-    backgroundUpdate();
+    backgroundUpdate(backgroundSpeed);
     
     timerUpdate();
     

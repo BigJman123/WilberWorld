@@ -12,7 +12,7 @@ function enemyAssets() {
     game.load.spritesheet('explosion', 'assets/explosion.png', 96, 96);
 }
 
-function enemyCreate(x, sprite, multiplier) {
+function enemyCreate(x, sprite) {
 
     enemyCars = enemy.create(x, -350, sprite);
     enemyCars.scale.setTo(.8, .8);

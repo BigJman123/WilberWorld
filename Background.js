@@ -28,9 +28,11 @@ function backgroundCreate() {
     
 }
 
-function backgroundUpdate() {
+let backgroundSpeed = 18;
+
+function backgroundUpdate(speed) {
     
     // this is what makes the background scroll
-    highway.tilePosition.y += 15;
+    highway.tilePosition.y += speed;
     
 }
