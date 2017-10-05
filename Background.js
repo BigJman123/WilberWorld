@@ -18,10 +18,12 @@ function backgroundCreate() {
     bounds = game.add.group();
     bounds.enableBody = true;
     
-    wallLeft = bounds.create(-123, 0, 'wall');
+    wallLeft = bounds.create(-123, 0, 'wall2');
+    wallLeft.body.allowGravity = false;
     wallLeft.body.immovable = true;
     
-    wallRight = bounds.create(910, 0, 'wall');
+    wallRight = bounds.create(910, 0, 'wall2');
+    wallRight.body.allowGravity = false;
     wallRight.body.immovable = true;
     
 }

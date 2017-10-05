@@ -25,6 +25,8 @@
 
 let game = new Phaser.Game(1080, 1920, Phaser.AUTO, '', { preload: preload, create: create, update: update });
 
+
+
 let tileSprite;
 
 let cherryred;
@@ -73,6 +75,8 @@ function create() {
     
     // starts physics
     game.physics.startSystem(Phaser.Physics.ARCADE);
+    
+    game.physics.arcade.gravity.y = 100;
     
     backgroundCreate();
     
