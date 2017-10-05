@@ -41,11 +41,11 @@ function timerUpdate() {
         
         setTimeout(() => {
           game.add.tween(cherryred).to({y: -500}, 2000, Phaser.Easing.Quadratic.In, true); 
-        }, 3000);
+        }, 4000);
         
         setTimeout(() => {
             game.add.tween(black).to({ alpha: 1 }, 2000, Phaser.Easing.Linear.None, true, 0, 0, false);
-        }, 5000);
+        }, 6000);
 
         setTimeout(() => {window.location = 'win.html'}, 7000);
     }
