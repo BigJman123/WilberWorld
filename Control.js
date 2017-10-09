@@ -15,30 +15,27 @@ function controlUpdate() {
     
     if(playerControlsEnabled) {
         
-        if(pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_LEFT) || pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < -0.1) {
-            console.log('left');
+        if(pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < -0.1) {
             cherryred.body.velocity.x -= 600;
             cherryred.angle = -10;
         }
         
-        else if (pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_RIGHT) || pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) > 0.1){
-            console.log('right');
+        else if (pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) > 0.1){
             cherryred.body.velocity.x += 600;
             cherryred.angle = +10;
         }
+
+        else {
+            cherryred.rotation = 0;
+        }
+
         
-        if (pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_UP) || pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) < -0.1){
-            console.log('up');
+        if (pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) < -0.1) {
             cherryred.body.velocity.y -= 500;
         }
         
-        else if (pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_DOWN) || pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) > 0.1){
-            console.log('down');
+        else if (pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) > 0.1) {
             cherryred.body.velocity.y += 700;
-        }
-        
-        else {
-            cherryred.rotation = 0;
         }
         
     }
