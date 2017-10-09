@@ -13,6 +13,7 @@
     <script type="text/javascript" src="Lives.js"></script>
     <script type="text/javascript" src="Timer.js"></script>
     <script type="text/javascript" src="TimeoutText.js"></script>
+    <script type="text/javascript" src="Control.js"></script>
     <style type="text/css">
         body {
             margin: 0;
@@ -119,6 +120,8 @@ function create() {
     
     timerCreate();
     
+    controlCreate();
+    
     // makes arrow keys avaliable
     speed = game.input.keyboard.addKey(Phaser.Keyboard.UP);
     brake = game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
@@ -207,13 +210,15 @@ function update() {
     //     newPowerUp.destroy();
     // }
     
-    playerUpdate();
+    // playerUpdate();
     
     backgroundUpdate(backgroundSpeed);
     
     timerUpdate();
     
     enemyUpdate();
+    
+    controlUpdate();
 }
 
 </script>

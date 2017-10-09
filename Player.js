@@ -1,4 +1,4 @@
-let playerControlsEnabled = false;
+// let playerControlsEnabled = false;
 
 function playerAssets() {
     
@@ -25,7 +25,7 @@ function playerCreate() {
     
 }
 
-function playerUpdate() {
+// function playerUpdate() {
     
     // if(minute > 0) {
     //     setTimeout(() => {cherryred.body.collideWorldBounds = true}, 3000);
@@ -34,30 +34,30 @@ function playerUpdate() {
     //     cherryred.body.collideWorldBounds = false;
     // }
     
-    cherryred.body.velocity.x = 0;
-    cherryred.body.velocity.y = 0;
+    // cherryred.body.velocity.x = 0;
+    // cherryred.body.velocity.y = 0;
     
     // these are the arrow controls that move the player character
     
-    if (playerControlsEnabled) {
-        if (speed.isDown) {
-        cherryred.body.velocity.y -= 500;
-        }
-        else if (brake.isDown) {
-            cherryred.body.velocity.y += 700;
-        }
+    // if (playerControlsEnabled) {
+    //     if (speed.isDown) {
+    //     cherryred.body.velocity.y -= 500;
+    //     }
+    //     else if (brake.isDown) {
+    //         cherryred.body.velocity.y += 700;
+    //     }
     
-        if (left.isDown) {
-            cherryred.body.velocity.x -= 600;
-            cherryred.angle = -10;
-        }
-        else if (right.isDown) {
-            cherryred.body.velocity.x += 600;
-            cherryred.angle = +10;
-        }
-        else {
-            cherryred.rotation = 0;
-        }
-    }
+    //     if (left.isDown) {
+    //         cherryred.body.velocity.x -= 600;
+    //         cherryred.angle = -10;
+    //     }
+    //     else if (right.isDown) {
+    //         cherryred.body.velocity.x += 600;
+    //         cherryred.angle = +10;
+    //     }
+    //     else {
+    //         cherryred.rotation = 0;
+    //     }
+    // }
     
-}
+// }
