@@ -18,11 +18,31 @@
 
 let game = new Phaser.Game(1080, 1920, Phaser.AUTO, '', { preload: preload, create: create});
 
+let wilberInfo;
+
 function preload() {
+    
+    game.load.image('wilberinfo', 'assets/wilberworldinfo.jpg', 1920, 3200);
     
 }
 
 function create() {
+    
+    wilberInfo = game.add.image(0, -2880, 'wilberinfo');
+    wilberInfo.scale.setTo(1.5, 1.5);
+    
+    setTimeout(() => {
+        game.add.tween(wilberInfo).to({ x: -1800 }, 5000, Phaser.Easing.Linear.None, true);
+    }, 1500);
+    
+    setTimeout(() => {
+        game.add.tween(wilberInfo).to({ x: -900 }, 3500, Phaser.Easing.Linear.None, true);
+    }, 8000);
+    
+    setTimeout(() => {
+        game.add.tween(wilberInfo.scale).to({ x: 1, y: 1 }, 5000, Phaser.Easing.Linear.None, true);
+        game.add.tween(wilberInfo).to({ x: -400, y: -1275 }, 5000, Phaser.Easing.Linear.None, true);
+    }, 13000);
     
 }
 
