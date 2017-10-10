@@ -122,6 +122,10 @@ function create() {
     
     controlCreate();
     
+    setTimeout(() => {
+        spawn(spawnDelay); 
+    }, 8250);
+    
     // makes arrow keys avaliable
     speed = game.input.keyboard.addKey(Phaser.Keyboard.UP);
     brake = game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
@@ -131,6 +135,7 @@ function create() {
 
 let spawner = [];
 let lastTime = 1;
+let spawnDelay;
 
 let updateGlobals = function(time) {
 
@@ -139,7 +144,7 @@ let updateGlobals = function(time) {
     let tick = 61 - time;
 
     let worldGravity = 200 + (tick * 16.6);
-    let spawnDelay = 1000 - (tick * 10);
+    spawnDelay = 1000 - (tick * 10);
     let roadSpeed = 18 + (tick * .36);
 
     game.physics.arcade.gravity.y = worldGravity;
@@ -152,27 +157,17 @@ let updateGlobals = function(time) {
 
     // delay one tick before destroying last spawner
 
-    if (spawner.length > 1) {
-        clearInterval(spawner.shift());
-    }
+    // if (spawner.length > 1) {
+    //     clearInterval(spawner.shift());
+    // }
 
-    let spawn = setInterval(function() {
-        enemyCreate(_.sample(enemySpawn), _.sample(enemyNames));
-    }, spawnDelay);
+    // let spawn = setInterval(function() {
+    //     enemyCreate(_.sample(enemySpawn), _.sample(enemyNames));
+    // }, spawnDelay);
 
-    spawner.push(spawn);
-    console.log(spawner);
-
+    // spawner.push(spawn);
+    // console.log(spawner);
 }
-
-// function carOrPowerup() {
-//     if(_.random(1, 15) === 1) {
-//         powerUpCreate(_.sample(powerUpSpawn));
-//     }
-//     else {
-//         enemyCreate(_.sample(enemySpawn), _.sample(enemyNames));
-//     }
-// }
 
 function update() {
     

@@ -82,3 +82,34 @@ function setDeceleratingTimeout(callback, factor, times)
 
     enemySpawnTimes.push(window.setTimeout(internalCallback, factor));
 };
+
+// let globalSpawn = 1000;
+let spawning = true;
+
+// decrease time to spawn
+// setInterval(() => {spawnDelay -= 10;}, 200)
+
+var spawn = function(wait) {
+
+	new Promise((resolve, reject) => {
+
+		setTimeout(() => {
+// 			debugger;
+			if (spawning && wait > 0) {
+				// spawn enemy here
+				// console.log('spawn enemy', wait);
+				enemyCreate(_.sample(enemySpawn), _.sample(enemyNames));
+				resolve();
+			} else {
+				reject();
+			}
+
+		}, wait);
+
+	})
+	.then(() => spawn(spawnDelay))
+	.catch(() => console.log('no more enemies'));
+};
+
+// kickoff
+// spawn(spawnDelay);
