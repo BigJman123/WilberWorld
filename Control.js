@@ -28,7 +28,6 @@ function controlUpdate() {
         else {
             cherryred.rotation = 0;
         }
-
         
         if (pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) < -0.1) {
             cherryred.body.velocity.y -= 500;
