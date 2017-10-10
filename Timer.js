@@ -32,6 +32,8 @@ function timerUpdate() {
         playerControlsEnabled = false;
         cherryred.angle = 0;
 
+
+        spawning = false;
         enemyDestroyAll();
         
         timer.stop();
@@ -47,6 +49,6 @@ function timerUpdate() {
             game.add.tween(black).to({ alpha: 1 }, 2000, Phaser.Easing.Linear.None, true, 0, 0, false);
         }, 6000);
 
-        // setTimeout(() => {window.location = 'win.html'}, 7000);
+        setTimeout(() => {window.location = 'win.html'}, 7000);
     }
 }

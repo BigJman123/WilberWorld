@@ -89,7 +89,7 @@ let spawning = true;
 // decrease time to spawn
 // setInterval(() => {spawnDelay -= 10;}, 200)
 
-var spawn = function(wait) {
+function spawn(wait) {
 
 	new Promise((resolve, reject) => {
 

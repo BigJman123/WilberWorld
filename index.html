@@ -34,6 +34,8 @@ let cherryred;
 let lives = 3;
 let livesText;
 
+let spawnDelay = 1000;
+
 let three;
 let two;
 let one;
@@ -90,31 +92,7 @@ function create() {
     powerUp.enableBody = true;
     powerUp.setAll('checkWorldBounds', true);
     powerUp.setAll('outOfBoundsKill', true);
-    
-    // setTimeout(() => {
-    //     // enemyInterval = setInterval(function() {
-    //     // enemyCreate(_.sample(enemySpawn), _.sample(enemyNames));
-    //     // }, 2000);
 
-
-    //     setDeceleratingTimeout(function(i) {
-    //         // determine x and sprite to use
-    //         // use i to determine gravity and velocity
-    //         enemyCreate(_.sample(enemySpawn), _.sample(enemyNames), i);
-    //     }, 12, 63);
-
-    // }, 5000);
-
-// setTimeout(function() {
-//     setInterval(function() {
-//         enemyCreate(_.sample(enemySpawn), _.sample(enemyNames));
-//     }, 1000);
-// }, 5000)
-    
-    
-    // setInterval(function() {
-    //     powerUpCreate(_.sample(powerUpSpawn));
-    // }, 3000);
     
     timeoutText();
     
@@ -124,7 +102,7 @@ function create() {
     
     setTimeout(() => {
         spawn(spawnDelay); 
-    }, 8250);
+    }, 3250);
     
     // makes arrow keys avaliable
     speed = game.input.keyboard.addKey(Phaser.Keyboard.UP);
@@ -133,40 +111,20 @@ function create() {
     left = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
 }
 
-let spawner = [];
-let lastTime = 1;
-let spawnDelay;
 
 let updateGlobals = function(time) {
 
     if (time === 60) return;
 
-    let tick = 61 - time;
+    let tick = (61 - time).toFixed();
 
     let worldGravity = 200 + (tick * 16.6);
     spawnDelay = 1000 - (tick * 10);
     let roadSpeed = 18 + (tick * .36);
 
     game.physics.arcade.gravity.y = worldGravity;
-    // delay wait on
     backgroundSpeed = roadSpeed;
-
-    // only call once per second
-    if (time === lastTime) return;
-    lastTime = time;
-
-    // delay one tick before destroying last spawner
-
-    // if (spawner.length > 1) {
-    //     clearInterval(spawner.shift());
-    // }
-
-    // let spawn = setInterval(function() {
-    //     enemyCreate(_.sample(enemySpawn), _.sample(enemyNames));
-    // }, spawnDelay);
-
-    // spawner.push(spawn);
-    // console.log(spawner);
+    
 }
 
 function update() {
