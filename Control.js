@@ -38,5 +38,26 @@ function controlUpdate() {
         }
         
     }
+
+    if (playerControlsEnabled) {
+        if (speed.isDown) {
+        cherryred.body.velocity.y -= 500;
+        }
+        else if (brake.isDown) {
+            cherryred.body.velocity.y += 700;
+        }
+    
+        if (left.isDown) {
+            cherryred.body.velocity.x -= 600;
+            cherryred.angle = -10;
+        }
+        else if (right.isDown) {
+            cherryred.body.velocity.x += 600;
+            cherryred.angle = +10;
+        }
+        else {
+            cherryred.rotation = 0;
+        }
+    }
     
 }
