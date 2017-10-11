@@ -1,0 +1,167 @@
+<!doctype html> 
+<html lang="en"> 
+<head> 
+	<meta charset="UTF-8" />
+	<title>Race to Wilber World</title>
+	<!--Lodash-->
+	<script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
+    <script src="//cdn.jsdelivr.net/phaser/2.6.2/phaser.min.js"></script>
+    <script type="text/javascript" src="Player.js"></script>
+    <script type="text/javascript" src="Enemy.js"></script>
+    <script type="text/javascript" src="Background.js"></script>
+    <script type="text/javascript" src="Powerup.js"></script>
+    <script type="text/javascript" src="Lives.js"></script>
+    <script type="text/javascript" src="Control.js"></script>
+    <!--<script type="text/javascript" src="Timer.js"></script>-->
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+<script type="text/javascript">
+
+let game = new Phaser.Game(1080, 1920, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+
+let tileSprite;
+
+let cherryred;
+let lives = 3;
+let speed;
+let brake;
+let left;
+let right;
+
+let cars;
+let enemyCars;
+let explosion;
+let carsCollide;
+
+let timer;
+let timerText;
+let minute = 60;
+
+let newPowerUp;
+
+let wallLeft;
+let wallRight;
+
+let black;
+let title;
+
+let enemyNames = ['car1','car2','car3','car4','car5','car6','car7', 'car8', 'car9', 'car10'];
+let enemySpawn = [238, 398, 568, 728];
+let powerUpSpawn = [285, 445, 610, 775];
+
+function preload() {
+    
+    game.load.image('title', 'assets/racetowilberworld.png', 1024, 814);
+    game.load.spritesheet('button', 'assets/button.png', 120, 60);
+    
+    // playerAssets();
+    enemyAssets();
+    backgroundAssets();
+    // powerUpAssets();
+    
+}
+
+function create() {
+    
+    // starts physics
+    game.physics.startSystem(Phaser.Physics.ARCADE);
+    
+    backgroundCreate();
+    
+    // playerCreate();
+    
+    enemy = game.add.group();
+    enemy.enableBody = true;
+    enemy.setAll('outOfBoundsKill', true);
+    enemy.setAll('checkWorldBounds', true);
+    
+    
+    
+    setInterval(function() {
+        enemyCreate(_.sample(enemySpawn), _.sample(enemyNames));
+    }, 3000);
+    
+    black = game.add.image(0, 0, 'black');
+    
+    black.alpha = .25;
+    
+    title = game.add.image(190, 300,  'title');
+    
+    title.scale.setTo(0.4, 0.4);
+    
+    let button = game.add.sprite(460, 1285, 'button');
+    let press = button.animations.add('press');
+    button.animations.play('press', 5, true, false);
+    
+    game.add.text(300, 1300, 'Press', { fontSize: '50px', fill: '#000' });
+    game.add.text(600, 1300, 'To Start', { fontSize: '50px', fill: '#000' })
+    
+    // makes arrow keys avaliable
+    // speed = game.input.keyboard.addKey(Phaser.Keyboard.UP);
+    // brake = game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
+    // right = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
+    // left = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
+    
+    function startGame() {
+        setTimeout(() => {window.location = 'index.html'}, 500);
+    }
+    
+    start = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+    start.onDown.add(startGame, this);
+}
+
+function update() {
+    
+    // collision between the car and the right/left walls
+    // var wallCollideLeft = game.physics.arcade.collide(cherryred, wallLeft);
+    // var wallCollideRight = game.physics.arcade.collide(cherryred, wallRight);
+    
+    // var carsCollide = game.physics.arcade.collide(enemy, cherryred, function(car, enemy) {
+        
+    //     // destroy enemy car
+    //     enemy.destroy();
+        
+    //     // cause explosion
+    //         let explosion = game.add.sprite(enemy.x - 55, enemy.y, 'explosion');
+    //         let boom = explosion.animations.add('boom');
+    //         explosion.scale.setTo(2.5, 2.5);
+    //         explosion.animations.play('boom', 30, false, true);
+        
+        
+    //     // game canvas will flash red
+    //     game.camera.flash(0xff0000, 200);
+        
+    //     livesCreate();
+        
+    //     // loging enemy car x/y location
+    //     console.log(enemy.x, enemy.y);
+        
+    // });
+    
+    // var carsCollideLeftWall = game.physics.arcade.collide(enemy, wallLeft);
+    // var carsCollideRightWall = game.physics.arcade.collide(enemy, wallRight);
+    
+    // var powerUpCollide = game.physics.arcade.collide(powerUp, cherryred, function(car, powerup) {powerUp.destroy();});
+    
+    
+    // if(powerUpCollide) {
+    //     newPowerUp.destroy();
+    // }
+    
+    // playerUpdate();
+    
+    backgroundUpdate();
+    
+    // enemyUpdate();
+}
+
+</script>
+
+</body>
+</html>
