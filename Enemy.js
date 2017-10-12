@@ -83,18 +83,14 @@ function setDeceleratingTimeout(callback, factor, times)
     enemySpawnTimes.push(window.setTimeout(internalCallback, factor));
 };
 
-// let globalSpawn = 1000;
 let spawning = true;
-
-// decrease time to spawn
-// setInterval(() => {spawnDelay -= 10;}, 200)
 
 function spawn(wait) {
 
 	new Promise((resolve, reject) => {
 
 		setTimeout(() => {
-// 			debugger;
+			// debugger;
 			if (spawning && wait > 0) {
 				// spawn enemy here
 				// console.log('spawn enemy', wait);
