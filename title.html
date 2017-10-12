@@ -66,7 +66,6 @@ let spawnDelay = 1000;
 
 let enemyNames = ['car1','car2','car3','car4','car5','car6','car7', 'car8', 'car9', 'car10'];
 let enemySpawn = [238, 398, 568, 728];
-let powerUpSpawn = [285, 445, 610, 775];
 
 function preload() {
     
@@ -83,6 +82,7 @@ function create() {
     
     // starts physics
     game.physics.startSystem(Phaser.Physics.ARCADE);
+    game.physics.arcade.gravity.y = 200;
     
     backgroundCreate();
     
@@ -93,7 +93,6 @@ function create() {
     enemy.setAll('outOfBoundsKill', true);
     enemy.setAll('checkWorldBounds', true);
     
-    let spawning = true;
     // let spawnDelay = 1000;
 
     spawn(spawnDelay);
@@ -106,23 +105,30 @@ function create() {
     controller.scale.setTo(.8, .8);
     let press = controller.animations.add('press');
     controller.animations.play('press', 10, true, false);
+
+    controlCreate();
     
     game.add.text(200, 1000, 'Press', { fontSize: '35px', fill: '#fff', font: 'Press Start 2P' });
     game.add.text(610, 1000, 'To Start', { fontSize: '35px', fill: '#fff', font: 'Press Start 2P' })
-    
-    function startGame() {
-        setTimeout(() => {window.location = 'index.html'}, 500);
-    }
     
     start = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     start.onDown.add(startGame, this);
 }
 
+function startGame() {
+        setTimeout(() => {window.location = 'index.html'}, 500);
+    }
+
 function update() {
     
     // backgroundUpdate();
 
-    highway.tilePosition.y += 15;
+    if (pad1.justPressed(Phaser.Gamepad.XBOX360_A))
+    {
+        startGame();
+    }
+
+    highway.tilePosition.y += 18;
 }
 
 </script>

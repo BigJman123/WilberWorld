@@ -53,6 +53,7 @@ function enemyDestroyAll() {
     });
 }
 
+
 function enemyUpdate() {
  
     let height = game.world.bounds.height + 500;
@@ -67,21 +68,6 @@ function enemyUpdate() {
 
 let enemySpawnTimes = [];
 
-
-// helper function
-function setDeceleratingTimeout(callback, factor, times)
-{
-    var internalCallback = function(tick, counter) {
-        return function() {
-            if (--tick >= 0) {
-                window.setTimeout(internalCallback, --counter * factor);
-                callback(tick);
-            }
-        }
-    }(times, 100);
-
-    enemySpawnTimes.push(window.setTimeout(internalCallback, factor));
-};
 
 let spawning = true;
 
