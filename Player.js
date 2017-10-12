@@ -24,21 +24,3 @@ function playerCreate() {
 
     
 }
-
-// function playerUpdate() {
-    
-    // if(minute > 0) {
-    //     setTimeout(() => {cherryred.body.collideWorldBounds = true}, 3000);
-    // }
-    // else {
-    //     cherryred.body.collideWorldBounds = false;
-    // }
-    
-    // cherryred.body.velocity.x = 0;
-    // cherryred.body.velocity.y = 0;
-    
-    // these are the arrow controls that move the player character
-    
-    
-    
-// }
