@@ -1,6 +1,17 @@
 <!doctype html> 
 <html lang="en"> 
-<head> 
+<head>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+    <script>
+        WebFont.load({ 
+            // active: function() { game.time.events.add(Phaser.Timer.SECOND, createText, this); },
+            google: {
+                families: ['Press Start 2P']
+            }
+        });
+    </script>
+
 	<meta charset="UTF-8" />
 	<title>Race to Wilber World</title>
 	<!--Lodash-->
@@ -57,7 +68,6 @@ let powerUpSpawn = [285, 445, 610, 775];
 
 function preload() {
     
-    game.load.image('title', 'assets/racetowilberworld.png', 1024, 814);
     game.load.spritesheet('button', 'assets/button.png', 120, 60);
     
     // playerAssets();
@@ -91,22 +101,12 @@ function create() {
     
     black.alpha = .25;
     
-    title = game.add.image(190, 300,  'title');
-    
-    title.scale.setTo(0.4, 0.4);
-    
-    let button = game.add.sprite(460, 1285, 'button');
+    let button = game.add.sprite(435, 975, 'button');
     let press = button.animations.add('press');
     button.animations.play('press', 5, true, false);
     
-    game.add.text(300, 1300, 'Press', { fontSize: '50px', fill: '#000' });
-    game.add.text(600, 1300, 'To Start', { fontSize: '50px', fill: '#000' })
-    
-    // makes arrow keys avaliable
-    // speed = game.input.keyboard.addKey(Phaser.Keyboard.UP);
-    // brake = game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
-    // right = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
-    // left = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
+    game.add.text(240, 1000, 'Press', { fontSize: '35px', fill: '#fff', font: 'Press Start 2P' });
+    game.add.text(570, 1000, 'To Start', { fontSize: '35px', fill: '#fff', font: 'Press Start 2P' })
     
     function startGame() {
         setTimeout(() => {window.location = 'index.html'}, 500);
@@ -118,47 +118,9 @@ function create() {
 
 function update() {
     
-    // collision between the car and the right/left walls
-    // var wallCollideLeft = game.physics.arcade.collide(cherryred, wallLeft);
-    // var wallCollideRight = game.physics.arcade.collide(cherryred, wallRight);
-    
-    // var carsCollide = game.physics.arcade.collide(enemy, cherryred, function(car, enemy) {
-        
-    //     // destroy enemy car
-    //     enemy.destroy();
-        
-    //     // cause explosion
-    //         let explosion = game.add.sprite(enemy.x - 55, enemy.y, 'explosion');
-    //         let boom = explosion.animations.add('boom');
-    //         explosion.scale.setTo(2.5, 2.5);
-    //         explosion.animations.play('boom', 30, false, true);
-        
-        
-    //     // game canvas will flash red
-    //     game.camera.flash(0xff0000, 200);
-        
-    //     livesCreate();
-        
-    //     // loging enemy car x/y location
-    //     console.log(enemy.x, enemy.y);
-        
-    // });
-    
-    // var carsCollideLeftWall = game.physics.arcade.collide(enemy, wallLeft);
-    // var carsCollideRightWall = game.physics.arcade.collide(enemy, wallRight);
-    
-    // var powerUpCollide = game.physics.arcade.collide(powerUp, cherryred, function(car, powerup) {powerUp.destroy();});
-    
-    
-    // if(powerUpCollide) {
-    //     newPowerUp.destroy();
-    // }
-    
-    // playerUpdate();
-    
-    backgroundUpdate();
-    
-    // enemyUpdate();
+    // backgroundUpdate();
+
+    highway.tilePosition.y += 15;
 }
 
 </script>
